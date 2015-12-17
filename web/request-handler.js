@@ -19,6 +19,9 @@ exports.handleRequest = function (req, res) {
     //console.log(data);
 //    archive.readListOfUrls();
 //    archive.isUrlInList('www.google.com');
+//    archive.isUrlArchived('www.example.com', function(data){
+//      console.log(data);
+//    });
     res.writeHead(200);
     res.write(data);
 

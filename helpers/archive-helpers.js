@@ -42,15 +42,24 @@ exports.isUrlInList = function(url, cb){
 
 };
 
-exports.addUrlToList = function(url){
+exports.addUrlToList = function(url, cb){
   fs.appendFile(exports.paths.list, url+"\n", function(err){
     if(err) throw err;
     console.log("The data to append was appended to the file!");
+    cb();
   });
 };
 
-exports.isUrlArchived = function(){
+exports.isUrlArchived = function(url, cb){
+  fs.readFile(exports.paths.archivedSites+'/'+url, 'utf-8', function(err, data){
+    if(err) {
+      cb(false) ;
+    } else {
+      cb(true);
+    }
+  });
 };
+
 
 exports.downloadUrls = function(){
 };
