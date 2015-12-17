@@ -11,3 +11,7 @@ fs.appendFile('message.txt', 'data to append', function (err) {
 fs.access('/etc/passwd', fs.R_OK | fs.W_OK, function (err) {
   console.log(err ? 'no access!' : 'can read/write');
 });
+
+
+//isUrlArchived - fs.stat
+//isUrlInList - fs.readFile
