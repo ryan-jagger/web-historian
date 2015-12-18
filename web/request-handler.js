@@ -7,28 +7,40 @@ var archive = require('../helpers/archive-helpers');
 
 
 exports.handleRequest = function (req, res) {
-
-  console.log(req.url);
-  console.log(req.method);
-  //console.log(req.headers);
+  if(req.method === "POST") {
+    //check to see if in sites.txt
+    //console.log("request object", req);
+    //console.log(req.method);
+    console.log('post req url', req.url);
+    archive.isUrlInList(req.url, function(exists) {
+      if (exists) {
+        console.log("it exists already");
+      } else {
+        archive.addUrlToList(req.url);
+      }
+    });
+      //is so, return the archived site
+    //if not, add to sites.text
+    //provide loading html
+  }
+//  console.log('request url: ', req.url);
+//  console.log('request method: ', req.method);
 
   fs.readFile(archive.paths.siteAssets+'/index.html', 'utf8', function(error, data){
     if(error) { console.log(error);}
-//    console.log(__dirname);
-//    console.log(path);
-    //console.log(data);
-//    archive.readListOfUrls();
-//    archive.isUrlInList('www.google.com');
-//    archive.isUrlArchived('www.example.com', function(data){
-//      console.log(data);
-//    });
+
+    // archive.downloadUrls(function(d){
+    //   console.log(d);
+    // });
+
+
+
+
     res.writeHead(200);
     res.write(data);
-
     res.end();
   });
 
-  //res.end(archive.paths.list);
 
 
 };
